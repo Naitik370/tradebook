@@ -1,35 +1,55 @@
-{% extends 'Front End/base.html' %} {% block content %}
-<section>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 col-centered">
-        <h1 class="mt-5 mb-3">Register</h1>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 offset-md-3 mt-3">
-        <form method="post" action="{% url 'register' %}">
-          {% csrf_token %} {% for field in form %}
-          <div class="form-group">
-            {{ field.label_tag }}
-            <input
-              type="{% if 'password' in field.label_tag %}password{% else %}text{% endif %}"
-              name="{{ field.html_name }}"
-              class="form-control"
-              maxlength="{% if 'username' in field.label_tag %}150{% endif %}"
-              id="{{ field.id_for_label }}"
-              required
-            />
-          </div>
-          {% if field.errors %} {% for error in field.errors %}
-          <p style="font-size: 13px;">
-            {{ error|escape }}
-          </p>
-          {% endfor %} {% endif %} {% endfor %}
-          <button type="submit" class="btn btn-primary mt-2">Register</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="register_style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form action="/login.html" method="post" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email ID:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            <div class="form-group">
+                show password
+                <input type="checkbox" id="showPassword">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Register">
+            </div>
+            <div id="error-message" style="color: red;"></div>
         </form>
-      </div>
     </div>
-  </div>
-</section>
-{% endblock %}
+
+    <script src="register.js"></script>
+</body>
+</html>
