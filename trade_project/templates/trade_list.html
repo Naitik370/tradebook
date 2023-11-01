@@ -1,0 +1,25 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Your Trades</h1>
+    <table>
+        <tr>
+            <th>Ticker</th>
+            <th>Quantity</th>
+            <th>Entry</th>
+            <th>Exit</th>
+            <th>Date</th>
+        </tr>
+        {% for trade in trades %}
+        <tr>
+            <td>{{ trade.Ticker }}</td>
+            <td>{{ trade.Quantity }}</td>
+            <td>{{ trade.Entry }}</td>
+            <td>{{ trade.Exit }}</td>
+            <td>{{ trade.Date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock content%}

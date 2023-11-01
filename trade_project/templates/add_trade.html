@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Create Trade</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            {{ trade.Ticker.label_tag }} {{ trade.Ticker }}
+        </div>
+        <div>
+            {{ trade.Quantity.label_tag }} {{ trade.Quantity }}
+        </div>
+        <div>
+            {{ trade.Entry.label_tag }} {{ trade.Entry }}
+        </div>
+        <div>
+            {{ trade.Exit.label_tag }} {{ trade.Exit }}
+        </div>
+        <div>
+            {{ trade.Date.label_tag }} {{ trade.Date }}
+        </div>
+        <button type="submit">Save Trade</button>
+    </form>
+{% endblock content%}
