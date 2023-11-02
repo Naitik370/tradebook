@@ -15,7 +15,6 @@ def register(request):
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
-            messages.success(request, 'You have singed up successfully.')
             login(request, user)
             return redirect('trade_list')
         else:
@@ -39,7 +38,6 @@ def login_view(request):
             user = authenticate(request,username=username,password=password)
             if user:
                 login(request, user)
-                messages.success(request,f'Hi {username.title()}, welcome back!')
                 return redirect('trade_list')
         
         # either form not valid or user is not authenticated
