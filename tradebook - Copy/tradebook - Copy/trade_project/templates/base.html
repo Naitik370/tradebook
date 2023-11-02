@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+		<script src="{% static 'js/app.js' %}" defer></script>
+		<title>Tradebook</title>
+	  </head>
+    <style>
+      
+      header {
+        background-color: #007BFF;
+        color: #fff;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      header a {
+        text-decoration: none;
+        color: #fff;
+        margin-left: 10px;
+      }
+
+      header a:hover {
+        text-decoration: underline;
+      }
+
+      .messages {
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: #f0f0f0;
+      }
+
+      .alert {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+      }
+
+      .alert-success {
+        background-color: #28a745;
+        color: #fff;
+      }
+
+      .alert-error {
+        background-color: #dc3545;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+  	<header>
+  		{% if request.user.is_authenticated %}
+  			<span style="font-weight: bold;">Hi {{ request.user.username | title }}</span>
+  			<a href="{% url 'logout' %}" style="text-decoration: none; margin-left: 10px;">Logout</a>
+			<a href="{% url 'add_trade' %}" style="text-decoration: none; margin-left: 10px;">Add</a>
+			<a href="{% url 'trade_list'%}" style="text-decoration: none; margin-left: 10px;">Show</a>
+  		{% else %}
+  			<a href="{% url 'login' %}" style="text-decoration: none; margin-left: 10px;">Login</a>
+            <a href="{% url 'register' %}" style="text-decoration: none; margin-left: 10px;">Register</a>
+  		{% endif %}
+  	</header>
+  	<main>
+	  	{% if messages %}
+			<div class="messages">
+			{% for message in messages %}
+				<div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %} style="border: 1px solid #ccc; background-color: #f0f0f0;">
+					{{ message }}
+				</div>
+			{% endfor %}
+			</div>
+		{% endif %}
+		    
+	    {% block content %} 
+	    {% endblock content %}
+  	</main>
+  </body>
+</html>
